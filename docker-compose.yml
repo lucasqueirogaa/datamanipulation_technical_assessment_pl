@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mongo_db:
+    container_name: database_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+
+  app:
+    build: .
+    restart: always
+    image: node:20
+    environment:
+      PORT: 3000
+      DB_URI: mongodb://mongo_db:27017/testedatabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo_db
+    volumes:
+      - .:/usr/src/app
+
+volumes:
+  mongo_db: {}
