@@ -4,7 +4,7 @@ import * as path from "path";
 import xlsx from "xlsx";
 
 import BoxesModel from "../models/boxesModel";
-import { IBoxesSheets } from "../types/BoxesType";
+import { IBoxesSheets } from "../types/Boxes";
 import logger from "../log/logger";
 
 const filePath = path.resolve(__dirname, "../../files/data.xls");

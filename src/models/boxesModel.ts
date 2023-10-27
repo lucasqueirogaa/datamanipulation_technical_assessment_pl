@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IBoxes } from "../types/BoxesType";
+import { IBoxes } from "../types/Boxes";
 
 const schema = new Schema<IBoxes>(
   {
