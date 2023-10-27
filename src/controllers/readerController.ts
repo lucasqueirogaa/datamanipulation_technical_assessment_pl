@@ -5,26 +5,21 @@ import xlsx from "xlsx";
 
 import BoxesModel from "../models/boxesModel";
 import { IBoxesSheets } from "../types/BoxesType";
+import logger from "../log/logger";
 
 const filePath = path.resolve(__dirname, "../../files/data.xls");
 
 const readXlsController = {
   boxes: async (res: Response) => {
-    const file = xlsx.readFile(filePath);
-    const sheet = file.Sheets["Boxes"];
-    const data: IBoxesSheets[] = xlsx.utils.sheet_to_json(sheet);
-
-    if (!file) {
-      res.status(500).json({ message: "Error with your XLS file" });
-    }
-    if (!sheet) {
-      res.status(500).json({ message: "This sheet is not valid" });
-    }
-    if (!data) {
-      res.status(500).json({ message: "Error with file" });
-    }
-
     try {
+      const file = xlsx.readFile(filePath);
+      const sheet = file.Sheets["Boxes"];
+      const data: IBoxesSheets[] = xlsx.utils.sheet_to_json(sheet);
+
+      if (!data) {
+        res.status(500).json({ message: "Error with file" });
+      }
+
       const boxesArray = data.map((obj) => {
         return {
           ...obj,
@@ -52,7 +47,7 @@ const readXlsController = {
 
       res.status(200).json({ message: "Sucess with return", Boxes: response });
     } catch (error) {
-      console.log(error);
+      logger.error(error);
       res.status(500).json({ message: "Something get wrong" });
     }
   },
