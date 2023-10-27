@@ -10,6 +10,7 @@ import { IBoxesSheets } from "../types/Boxes";
 import { ISplittersSheets } from "../types/Splitters";
 
 import logger from "../log/logger";
+import { IUsers, IUsersSheets } from "../types/User";
 
 const filePath = path.resolve(__dirname, "../../files/data.xls");
 
@@ -39,7 +40,7 @@ const readXlsController = {
       const sheet = file.Sheets["Boxes"];
       const data: IBoxesSheets[] = xlsx.utils.sheet_to_json(sheet);
 
-      if (!data) {
+      if (data.length < 1) {
         return res.status(400).json({ message: "Error with file" });
       }
 
@@ -102,7 +103,7 @@ const readXlsController = {
       const sheet = file.Sheets["Splitters"];
       const data: ISplittersSheets[] = xlsx.utils.sheet_to_json(sheet);
 
-      if (!data) {
+      if (data.length < 1) {
         return res.status(400).json({ message: "Error with file" });
       }
 
