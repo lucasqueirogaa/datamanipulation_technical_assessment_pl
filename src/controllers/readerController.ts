@@ -38,7 +38,7 @@ const readXlsController = {
       const data: IBoxesSheets[] = xlsx.utils.sheet_to_json(sheet);
 
       if (!data) {
-        res.status(400).json({ message: "Error with file" });
+        return res.status(400).json({ message: "Error with file" });
       }
 
       const boxesArray = data.map((obj) => {
