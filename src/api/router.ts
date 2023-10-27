@@ -7,3 +7,6 @@ export const router = Router();
 router.post("/read-xls/boxes", (req: Request, res: Response) => {
   readXlsController.boxes(res);
 });
+router.post("/read-xls/splitters", (req: Request, res: Response) => {
+  readXlsController.splitters(res);
+});
