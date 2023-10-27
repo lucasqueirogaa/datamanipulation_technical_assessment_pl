@@ -3,29 +3,9 @@ import { IBoxes } from "../types/Boxes";
 
 const schema = new Schema<IBoxes>(
   {
-    project: {
-      type: String,
-      required: true,
-    },
-    draft: Boolean,
-    implanted: {
-      type: Boolean,
-      required: true,
-    },
-    certified: Boolean,
-    hierarchyLevel: {
-      type: Number,
-      required: true,
-    },
-    template: String,
-    boxType: {
-      type: String,
-      required: true,
-    },
     name: {
       type: String,
     },
-    coords: Array<Number>,
     lat: {
       type: String,
       required: true,
@@ -34,6 +14,23 @@ const schema = new Schema<IBoxes>(
       type: String,
       required: true,
     },
+    boxType: {
+      type: String,
+      required: true,
+    },
+    implanted: {
+      type: Boolean,
+      required: true,
+    },
+    project: {
+      type: String,
+      required: true,
+    },
+    hierarchyLevel: {
+      type: Number,
+      required: true,
+    },
+    coords: Array<Number>,
   },
   { timestamps: true }
 );

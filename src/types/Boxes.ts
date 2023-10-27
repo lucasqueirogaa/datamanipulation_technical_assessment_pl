@@ -7,15 +7,12 @@ export interface IBoxesSheets {
 }
 
 export interface IBoxes {
-  project: string;
-  draft: boolean;
-  implanted: boolean;
-  certified: boolean;
-  hierarchyLevel: number;
-  template: string;
-  boxType: string;
   name: string;
-  coords: Number[];
   lat: string;
   lng: string;
+  boxType: string;
+  implanted: boolean;
+  project: string;
+  hierarchyLevel: number;
+  coords: Number[];
 }

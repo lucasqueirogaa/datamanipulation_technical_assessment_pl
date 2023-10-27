@@ -6,11 +6,32 @@ import xlsx from "xlsx";
 import BoxesModel from "../models/boxesModel";
 import { IBoxesSheets } from "../types/Boxes";
 import logger from "../log/logger";
+import { ISplittersSheets } from "../types/Splitters";
+import axios from "axios";
 
 const filePath = path.resolve(__dirname, "../../files/data.xls");
 
 const readXlsController = {
   boxes: async (res: Response) => {
+    let boxesTypes = [];
+
+    const options = {
+      method: "GET",
+      url: "https://data-manipulation-6.ozmap.com.br:9994/api/v2/box-types",
+      headers: {
+        Accept: "application/json",
+        Authorization: process.env.AUTHORIZATION,
+      },
+    };
+
+    try {
+      const { data } = await axios.request(options);
+      boxesTypes = data.rows;
+    } catch (error) {
+      logger.error(error);
+      throw new Error(error);
+    }
+
     try {
       const file = xlsx.readFile(filePath);
       const sheet = file.Sheets["Boxes"];
@@ -21,26 +42,23 @@ const readXlsController = {
       }
 
       const boxesArray = data.map((obj) => {
+        const boxType = (type: String) => {
+          const returnType = boxesTypes.find((obj) => {
+            return obj.code === type;
+          });
+          return returnType.id;
+        };
+
         return {
-          ...obj,
           _id: new ObjectId(),
-          project: process.env.PROJECT,
-          draft: false,
-          implanted: true,
-          certified: false,
-          hierarchyLevel: obj.Level || obj.Type === "CE" ? 3 : 2,
-          template:
-            obj.Type === "CE"
-              ? "589de1d126324a2564a6c4d0"
-              : "5da6146f493d9c00066653f7",
-          boxType:
-            obj.Type === "CE"
-              ? "589ddcf07dfe452f10d7c274"
-              : "589ddcf07dfe452f10d7c275",
           name: obj.Name || "",
-          coords: [],
           lat: obj.Latitude || 0,
           lng: obj.Longitude || 0,
+          boxType: boxType(obj.Type),
+          implanted: true,
+          project: process.env.PROJECT,
+          hierarchyLevel: obj.Level || obj.Type === "CE" ? 3 : 2,
+          coords: [],
         };
       });
       const response = await BoxesModel.insertMany(boxesArray);
