@@ -1,7 +1,9 @@
 import { Request, Response, Router } from "express";
+import readXlsController from "../controllers/readerController";
 
 export const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ message: "Hello, world 6" });
+// Read and save tables on mongoDB
+router.post("/read-xls/boxes", (req: Request, res: Response) => {
+  readXlsController.boxes(res);
 });
