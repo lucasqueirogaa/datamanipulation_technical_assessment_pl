@@ -6,12 +6,12 @@ import xlsx from "xlsx";
 
 import BoxesModel from "../models/boxesModel";
 import SplittersModel from "../models/splittersModel";
+import ClientsModel from "../models/clientsModel";
 import { IBoxesSheets } from "../types/Boxes";
 import { ISplittersSheets } from "../types/Splitters";
+import { IClientsSheets } from "../types/Clients";
 
 import logger from "../log/logger";
-import { IClientsSheets } from "../types/Clients";
-import ClientsModel from "../models/clientsModel";
 
 const filePath = path.resolve(__dirname, "../../files/data.xls");
 
