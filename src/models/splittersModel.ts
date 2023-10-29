@@ -13,7 +13,6 @@ const schema = new Schema<ISplitters>(
     },
     parent: {
       type: String,
-      required: true,
     },
     splitterType: {
       type: String,

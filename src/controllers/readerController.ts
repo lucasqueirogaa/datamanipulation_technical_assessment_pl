@@ -115,20 +115,11 @@ const readXlsController = {
           });
           return returnType.id;
         };
-        const parentId = (type: String) => {
-          const returnType = boxes.find((obj) => {
-            return obj.name === type;
-          });
-          if (returnType) {
-            return returnType._id.toString();
-          }
-          return process.env.PROJECT;
-        };
 
         return {
           implanted: obj.Implanted === "No" ? false : true,
           isDrop: obj["Allows client connection"] === "No" ? false : true,
-          parent: parentId(obj.Box),
+          parent: obj.Box || "",
           project: process.env.PROJECT,
           name: obj.Name,
           splitterType: splitterType(obj.Type),
