@@ -76,12 +76,6 @@ const readXlsController = {
   splitters: async (res: Response) => {
     let splittersTypes = [];
 
-    const boxes = await BoxesModel.find({});
-
-    if (boxes.length < 1) {
-      return res.status(400).json({ message: "You need the boxes on DB" });
-    }
-
     const options = {
       method: "GET",
       url: "https://data-manipulation-6.ozmap.com.br:9994/api/v2/splitter-types",
