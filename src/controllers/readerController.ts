@@ -67,7 +67,8 @@ const readXlsController = {
       });
       const response = await BoxesModel.insertMany(boxesArray);
 
-      res.status(200).json({ message: "Sucess with return", Boxes: response });
+      res.status(200).json({ message: "Success with return", Boxes: response });
+      logger.info("Success on read and save boxes on DB");
     } catch (error) {
       logger.error(error);
       res.status(500).json({ message: "Something get wrong" });
@@ -127,7 +128,8 @@ const readXlsController = {
 
       res
         .status(200)
-        .json({ message: "Sucess with return", Splitters: response });
+        .json({ message: "Success with return", Splitters: response });
+      logger.info("Success on read and save splitters on DB");
     } catch (error) {
       logger.error(error);
       res.status(500).json({ message: "Something get wrong" });
@@ -178,7 +180,10 @@ const readXlsController = {
 
       const response = await ClientsModel.insertMany(userArray);
 
-      res.status(200).json({ message: "Sucess with return", Users: response });
+      res
+        .status(200)
+        .json({ message: "Success with return", Clients: response });
+      logger.info("Success on read and save clients on DB");
     } catch (error) {
       logger.error(error);
       res.status(500).json({ message: "Something get wrong" });
