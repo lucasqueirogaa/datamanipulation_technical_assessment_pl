@@ -61,7 +61,7 @@ const readXlsController = {
           boxType: boxType(obj.Type),
           implanted: true,
           project: process.env.PROJECT,
-          hierarchyLevel: obj.Level || obj.Type === "CE" ? 3 : 2,
+          hierarchyLevel: obj.Type === "CTO" ? 3 : 2,
           coords: [],
         };
       });
