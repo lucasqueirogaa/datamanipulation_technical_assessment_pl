@@ -7,35 +7,15 @@ const schema = new Schema<IClients>(
       type: String,
       required: true,
     },
-    project: {
-      type: String,
-      required: true,
-    },
     box: {
       type: String,
     },
     lat: {
-      type: String,
+      type: Number,
       required: true,
     },
     lng: {
-      type: String,
-      required: true,
-    },
-    force: {
-      type: Boolean,
-      required: true,
-    },
-    auto_connect: {
-      type: Boolean,
-      required: true,
-    },
-    username: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
+      type: Number,
       required: true,
     },
     name: {
@@ -44,6 +24,10 @@ const schema = new Schema<IClients>(
     },
     code: {
       type: String,
+      required: true,
+    },
+    status: {
+      type: Number,
       required: true,
     },
   },
