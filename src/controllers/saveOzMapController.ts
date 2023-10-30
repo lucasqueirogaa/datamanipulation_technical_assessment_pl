@@ -1,5 +1,6 @@
 import { Response } from "express";
 import axios from "axios";
+import dotenv from "dotenv";
 
 import BoxesModel from "../models/boxesModel";
 import { IBoxes } from "../types/Boxes";
@@ -7,17 +8,20 @@ import { IBoxes } from "../types/Boxes";
 import logger from "../log/logger";
 import PostedBoxesModel from "../models/postedBoxes";
 
+dotenv.config();
+
+const axiosInstance = axios.create({
+  baseURL: "https://data-manipulation-6.ozmap.com.br:9994/api/v2/",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Authorization: process.env.AUTHORIZATION,
+  },
+});
+
 const saveOzMapController = {
   boxes: async (res: Response) => {
     const boxes: IBoxes[] = await BoxesModel.find({});
-    const axiosInstance = axios.create({
-      baseURL: "https://data-manipulation-6.ozmap.com.br:9994/api/v2/",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: process.env.AUTHORIZATION,
-      },
-    });
 
     if (boxes.length < 1) {
       return res.status(400).json({ message: "You need to have boxes on DB" });
