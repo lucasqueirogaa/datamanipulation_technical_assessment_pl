@@ -12,57 +12,6 @@ import SplittersModel from "../models/splittersModel";
 
 dotenv.config();
 
-const testeSplitters = [
-  {
-    project: "65381629de424200206126b7",
-    isDrop: false,
-    parent: "CTO - 1",
-    splitterType: "5da6106b493d9c00066653f4",
-    ratio: {
-      output: 2,
-      input: 1,
-    },
-    implanted: true,
-    name: "Splitter 1",
-  },
-  {
-    project: "65381629de424200206126b7",
-    isDrop: false,
-    parent: "CTO - 2",
-    splitterType: "5da6106b493d9c00066653f4",
-    ratio: {
-      output: 2,
-      input: 1,
-    },
-    implanted: true,
-    name: "",
-  },
-  {
-    project: "65381629de424200206126b7",
-    isDrop: false,
-    parent: "Condominio 1",
-    splitterType: "5da6106b493d9c00066653f4",
-    ratio: {
-      output: 2,
-      input: 1,
-    },
-    implanted: true,
-    name: "",
-  },
-  {
-    project: "65381629de424200206126b7",
-    isDrop: false,
-    parent: "",
-    splitterType: "5da6106b493d9c00066653f4",
-    ratio: {
-      output: 2,
-      input: 1,
-    },
-    implanted: true,
-    name: "",
-  },
-];
-
 const axiosInstance = axios.create({
   baseURL: "https://data-manipulation-6.ozmap.com.br:9994/api/v2/",
   headers: {
