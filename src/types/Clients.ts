@@ -1,20 +1,16 @@
 export interface IClientsSheets {
-  Latitude: String;
-  Longitude: String;
-  Box: String;
-  Status: String;
+  Latitude: string;
+  Longitude: string;
+  Box: string;
+  Status: string;
 }
 
 export interface IClients {
-  address: String;
-  project: String;
-  box: String;
-  lat: String;
-  lng: String;
-  force: Boolean;
-  auto_connect: Boolean;
-  username: String;
-  email: String;
-  name: String;
-  code: String;
+  address: string;
+  box: string;
+  lat: number;
+  lng: number;
+  name: string;
+  code: string;
+  status: number;
 }
