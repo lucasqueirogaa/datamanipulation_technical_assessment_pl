@@ -59,10 +59,8 @@ const readXlsController = {
           lat: parseFloat(obj.Latitude) || 0,
           lng: parseFloat(obj.Longitude) || 0,
           boxType: boxType(obj.Type),
-          implanted: true,
           project: process.env.PROJECT,
           hierarchyLevel: obj.Type === "CTO" ? 3 : 2,
-          coords: null,
         };
       });
       const response = await BoxesModel.insertMany(boxesArray);

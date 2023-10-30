@@ -18,10 +18,6 @@ const schema = new Schema<IBoxes>(
       type: String,
       required: true,
     },
-    implanted: {
-      type: Boolean,
-      required: true,
-    },
     project: {
       type: String,
       required: true,
@@ -30,7 +26,6 @@ const schema = new Schema<IBoxes>(
       type: Number,
       required: true,
     },
-    coords: Array<Number>,
   },
   { timestamps: true }
 );
