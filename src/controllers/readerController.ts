@@ -160,20 +160,16 @@ const readXlsController = {
 
         return {
           address: `${currentRandomUser.location.street.name} ${currentRandomUser.location.street.number} ${currentRandomUser.location.postcode} ${currentRandomUser.location.city} ${currentRandomUser.location.state} ${currentRandomUser.location.country}`,
-          project: process.env.PROJECT,
           box: obj.Box || "",
-          lat: obj.Latitude || 0,
-          lng: obj.Longitude || 0,
-          force: true,
-          auto_connect: true,
-          username: currentRandomUser.login.username,
-          email: currentRandomUser.email,
+          lat: parseFloat(obj.Latitude) || 0,
+          lng: parseFloat(obj.Longitude) || 0,
           name: `${currentRandomUser.name.first} ${currentRandomUser.name.last}`,
           code: `${(
             currentRandomUser.name.first +
             "." +
             currentRandomUser.name.last
           ).toLocaleLowerCase()}`,
+          status: obj.Status === "OK" ? 0 : 1,
         };
       });
 
