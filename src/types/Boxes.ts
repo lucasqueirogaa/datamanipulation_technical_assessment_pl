@@ -1,15 +1,15 @@
 export interface IBoxesSheets {
-  Name: String;
-  Latitude: String;
-  Longitude: String;
-  Type: String;
-  Level: Number;
+  Name: string;
+  Latitude: string;
+  Longitude: string;
+  Type: string;
+  Level: number;
 }
 
 export interface IBoxes {
   name: string;
-  lat: string;
-  lng: string;
+  lat: number;
+  lng: number;
   boxType: string;
   implanted: boolean;
   project: string;

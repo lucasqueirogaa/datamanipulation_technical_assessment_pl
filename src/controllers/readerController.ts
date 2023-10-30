@@ -46,7 +46,7 @@ const readXlsController = {
       }
 
       const boxesArray = data.map((obj) => {
-        const boxType = (type: String) => {
+        const boxType = (type: string) => {
           const returnType = boxesTypes.find((obj) => {
             return obj.code === type;
           });
@@ -56,13 +56,13 @@ const readXlsController = {
         return {
           _id: new ObjectId(),
           name: obj.Name || "",
-          lat: obj.Latitude || 0,
-          lng: obj.Longitude || 0,
+          lat: parseFloat(obj.Latitude) || 0,
+          lng: parseFloat(obj.Longitude) || 0,
           boxType: boxType(obj.Type),
           implanted: true,
           project: process.env.PROJECT,
           hierarchyLevel: obj.Type === "CTO" ? 3 : 2,
-          coords: [],
+          coords: null,
         };
       });
       const response = await BoxesModel.insertMany(boxesArray);

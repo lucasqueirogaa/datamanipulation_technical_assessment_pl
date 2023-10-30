@@ -7,11 +7,11 @@ const schema = new Schema<IBoxes>(
       type: String,
     },
     lat: {
-      type: String,
+      type: Number,
       required: true,
     },
     lng: {
-      type: String,
+      type: Number,
       required: true,
     },
     boxType: {
