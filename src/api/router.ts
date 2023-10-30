@@ -22,3 +22,6 @@ router.post("/save/boxes", (req: Request, res: Response) => {
 router.post("/save/splitters", (req: Request, res: Response) => {
   saveOzMapController.splitters(res);
 });
+router.post("/save/clients", (req: Request, res: Response) => {
+  saveOzMapController.clients(res);
+});
