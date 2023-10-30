@@ -19,3 +19,6 @@ router.post("/read-xls/users", (req: Request, res: Response) => {
 router.post("/save/boxes", (req: Request, res: Response) => {
   saveOzMapController.boxes(res);
 });
+router.post("/save/splitters", (req: Request, res: Response) => {
+  saveOzMapController.splitters(res);
+});
