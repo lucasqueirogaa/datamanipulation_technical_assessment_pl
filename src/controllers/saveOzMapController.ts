@@ -22,16 +22,10 @@ const saveOzMapController = {
       return res.status(400).json({ message: "You need to have boxes on DB" });
     }
 
-    const sortedArray = boxes.sort((a, b) => {
-      if (a.name === "" && b.name !== "") {
-        return 1;
-      } else if (a.name !== "" && b.name === "") {
-        return -1;
-      }
-      return 0;
-    });
+    const emptyNameItems = boxes.filter((box) => box.name === "");
+    const normalItems = boxes.filter((box) => box.name !== "");
 
-    const axiosRequests = sortedArray.map(async (box) => {
+    const axiosRequests = normalItems.map(async (box) => {
       try {
         const res = await axiosInstance.post("boxes", {
           name: box.name,
@@ -53,9 +47,34 @@ const saveOzMapController = {
     });
 
     try {
-      await Promise.all(axiosRequests);
-
       res.status(200).json({ message: "Boxes send with success" });
+
+      await Promise.allSettled(axiosRequests);
+
+      const axiosRequestsEmptyName = emptyNameItems.map(async (box) => {
+        try {
+          const res = await axiosInstance.post("boxes", {
+            name: box.name,
+            lat: box.lat,
+            lng: box.lng,
+            boxType: box.boxType,
+            implanted: true,
+            project: box.project,
+            hierarchyLevel: box.hierarchyLevel,
+            coords: null,
+          });
+
+          logger.info(
+            `Request succeeded for box: ${box.name || res.data.name}`
+          );
+        } catch (error) {
+          logger.error(
+            `Request failed for box: ${box.name}, Error message: ${error.response.data}`
+          );
+        }
+      });
+
+      await Promise.allSettled(axiosRequestsEmptyName);
     } catch (error) {
       logger.error(error);
       res.status(500).json({ message: "Something get wrong", error: error });
