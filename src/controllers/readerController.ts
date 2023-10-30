@@ -63,16 +63,8 @@ const readXlsController = {
           hierarchyLevel: obj.Type === "CTO" ? 3 : 2,
         };
       });
-      const boxesArraySorted = boxesArray.sort((a, b) => {
-        if (a.name === "" && b.name !== "") {
-          return 1;
-        } else if (a.name !== "" && b.name === "") {
-          return -1;
-        }
-        return 0;
-      });
 
-      const response = await BoxesModel.insertMany(boxesArraySorted);
+      const response = await BoxesModel.insertMany(boxesArray);
 
       res.status(200).json({ message: "Success with return", Boxes: response });
       logger.info("Success on read and save boxes on DB");
