@@ -9,6 +9,8 @@ import logger from "../log/logger";
 import PostedBoxesModel from "../models/postedBoxes";
 import { ISplitters } from "../types/Splitters";
 import SplittersModel from "../models/splittersModel";
+import { IClients } from "../types/Clients";
+import ClientsModel from "../models/clientsModel";
 
 dotenv.config();
 
@@ -136,6 +138,62 @@ const saveOzMapController = {
 
     try {
       res.status(200).json({ message: "Splitters send with success" });
+
+      await Promise.allSettled(axiosRequests);
+    } catch (error) {
+      logger.error(error);
+      res.status(500).json({ message: "Something get wrong", error: error });
+    }
+  },
+  clients: async (res: Response) => {
+    const clients: IClients[] = await ClientsModel.find({});
+
+    if (clients.length < 1) {
+      return res
+        .status(400)
+        .json({ message: "You need to have clients on DB" });
+    }
+
+    const axiosRequests = clients.map(async (client) => {
+      const getBoxId = async (box: string) => {
+        const res = await PostedBoxesModel.findOne({ name: box });
+
+        if (res === null || res === undefined) return null;
+        return res.id;
+      };
+
+      const boxId = client.box ? await getBoxId(client.box) : null;
+
+      try {
+        await axiosInstance.post("properties", {
+          address: client.address,
+          project: process.env.PROJECT,
+          box: boxId,
+          lat: client.lat,
+          lng: client.lng,
+          force: true,
+          auto_connect: true,
+          client: {
+            implanted: true,
+            name: client.name,
+            code: client.code,
+            status: client.status,
+          },
+        });
+
+        logger.info(
+          `Request succeeded for Propertie: ${client.address} with client code: ${client.code}`
+        );
+      } catch (error) {
+        console.log(error);
+        logger.error(
+          `Request failed for client: ${client.code}, Error message: ${error.response.data}`
+        );
+      }
+    });
+
+    try {
+      res.status(200).json({ message: "Clients sent successfully." });
 
       await Promise.allSettled(axiosRequests);
     } catch (error) {
