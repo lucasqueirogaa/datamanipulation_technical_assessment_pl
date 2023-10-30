@@ -5,6 +5,7 @@ import BoxesModel from "../models/boxesModel";
 import { IBoxes } from "../types/Boxes";
 
 import logger from "../log/logger";
+import PostedBoxesModel from "../models/postedBoxes";
 
 const saveOzMapController = {
   boxes: async (res: Response) => {
@@ -38,7 +39,11 @@ const saveOzMapController = {
           coords: null,
         });
 
-        logger.info(`Request succeeded for box: ${box.name || res.data.name}`);
+        logger.info(`Request succeeded for box: ${box.name}`);
+        await PostedBoxesModel.create({
+          name: res.data.name,
+          id: res.data.id,
+        });
       } catch (error) {
         logger.error(
           `Request failed for box: ${box.name}, Error message: ${error.response.data}`
@@ -64,9 +69,11 @@ const saveOzMapController = {
             coords: null,
           });
 
-          logger.info(
-            `Request succeeded for box: ${box.name || res.data.name}`
-          );
+          logger.info(`Request succeeded for box: ${res.data.name}`);
+          await PostedBoxesModel.create({
+            name: res.data.name,
+            id: res.data.id,
+          });
         } catch (error) {
           logger.error(
             `Request failed for box: ${box.name}, Error message: ${error.response.data}`
