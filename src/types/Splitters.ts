@@ -9,16 +9,16 @@ export interface ISplittersSheets {
 }
 
 interface ISplittersRatio {
-  input: Number;
-  output: Number;
+  input: number;
+  output: number;
 }
 
 export interface ISplitters {
-  implanted: Boolean;
-  isDrop: Boolean;
-  parent: String;
-  project: String;
-  name: String;
-  splitterType: String;
+  implanted: boolean;
+  isDrop: boolean;
+  parent: string;
+  project: string;
+  name: string;
+  splitterType: string;
   ratio: ISplittersRatio;
 }
