@@ -60,7 +60,7 @@ const saveOzMapController = {
     });
 
     try {
-      res.status(200).json({ message: "Boxes send with success" });
+      res.status(200).json({ message: "Boxes sent successfully." });
 
       await Promise.allSettled(axiosRequests);
 
@@ -137,7 +137,7 @@ const saveOzMapController = {
     });
 
     try {
-      res.status(200).json({ message: "Splitters send with success" });
+      res.status(200).json({ message: "Splitters sent successfully." });
 
       await Promise.allSettled(axiosRequests);
     } catch (error) {
