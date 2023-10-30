@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import readXlsController from "../controllers/readerController";
+import saveOzMapController from "../controllers/saveOzMapController";
 
 export const router = Router();
 
@@ -12,4 +13,9 @@ router.post("/read-xls/splitters", (req: Request, res: Response) => {
 });
 router.post("/read-xls/users", (req: Request, res: Response) => {
   readXlsController.clients(res);
+});
+
+// Save on OzMap
+router.post("/save/boxes", (req: Request, res: Response) => {
+  saveOzMapController.boxes(res);
 });
