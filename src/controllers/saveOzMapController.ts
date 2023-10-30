@@ -108,10 +108,13 @@ const saveOzMapController = {
       const getParent = async (parent: string) => {
         const res = await PostedBoxesModel.findOne({ name: parent });
 
+        if (res === null || res === undefined) return null;
         return res.id;
       };
 
-      const parentId = await getParent(splitter.parent);
+      const parentId = splitter.parent
+        ? await getParent(splitter.parent)
+        : null;
 
       try {
         const res = await axiosInstance.post("splitters", {
@@ -131,7 +134,7 @@ const saveOzMapController = {
         );
       } catch (error) {
         logger.error(
-          `Request failed for box: ${splitter.name}, Error message: ${error.response.data}`
+          `Request failed for box: ${splitter.name} with parent: ${splitter.parent}, Error message: ${error.response.data}`
         );
       }
     });
