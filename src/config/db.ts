@@ -4,9 +4,7 @@ import logger from "../log/logger";
 
 dotenv.config();
 
-const uri = process.env.DB_URI;
-
-const connectToDB = async () => {
+const connectToDB = async (uri: string) => {
   try {
     await mongoose.connect(uri, {});
     logger.info("MongoDB connected");
