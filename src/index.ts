@@ -6,9 +6,10 @@ import logger from "./log/logger";
 
 dotenv.config();
 
-connectToDB();
+const uri = process.env.DB_URI;
 const port = process.env.PORT || 3001;
 
+connectToDB(uri);
 server.listen(port, () => {
   logger.info(`Listening on port: ${port}`);
 });
