@@ -13,5 +13,15 @@ const connectToDB = async (uri: string) => {
     process.exit(1);
   }
 };
-Recive mongo URI by params
-export { connectToDB };
+const disconnectToDB = async () => {
+  try {
+    await mongoose.connection.dropDatabase();
+    await mongoose.connection.close();
+    logger.info("MongoDB disconnected and droped");
+  } catch (error) {
+    logger.error(`You have a error: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+export { connectToDB, disconnectToDB };
