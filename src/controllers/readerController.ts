@@ -33,7 +33,7 @@ const readXlsController = {
       boxesTypes = data.rows;
     } catch (error) {
       logger.error(error);
-      throw new Error(error);
+      return res.status(400).json({ message: "Error with boxes types" });
     }
 
     try {
@@ -90,7 +90,7 @@ const readXlsController = {
       splittersTypes = data.rows;
     } catch (error) {
       logger.error(error);
-      throw new Error(error);
+      return res.status(400).json({ message: "Error with splitter types" });
     }
 
     try {
