@@ -13,5 +13,5 @@ const connectToDB = async (uri: string) => {
     process.exit(1);
   }
 };
-
+Recive mongo URI by params
 export { connectToDB };
