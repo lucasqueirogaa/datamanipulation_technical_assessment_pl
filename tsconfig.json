@@ -9,6 +9,6 @@
     "outDir": "./dist",
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "dbController.ts"],
   "exclude": ["node_modules/**/*"]
 }
