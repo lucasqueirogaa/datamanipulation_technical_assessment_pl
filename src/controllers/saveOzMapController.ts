@@ -96,9 +96,10 @@ const saveOzMapController = {
     }
   },
   splitters: async (res: Response) => {
+    const boxes: ISplitters[] = await BoxesModel.find({});
     const splitters: ISplitters[] = await SplittersModel.find({});
 
-    if (splitters.length < 1) {
+    if (splitters.length < 1 || boxes.length < 1) {
       return res
         .status(400)
         .json({ message: "You need to have splitters on DB" });
