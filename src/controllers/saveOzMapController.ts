@@ -150,9 +150,11 @@ const saveOzMapController = {
     }
   },
   clients: async (res: Response) => {
+    const boxes: ISplitters[] = await BoxesModel.find({});
+    const splitters: ISplitters[] = await SplittersModel.find({});
     const clients: IClients[] = await ClientsModel.find({});
 
-    if (clients.length < 1) {
+    if (clients.length < 1 || splitters.length < 1 || boxes.length < 1) {
       return res
         .status(400)
         .json({ message: "You need to have clients on DB" });
