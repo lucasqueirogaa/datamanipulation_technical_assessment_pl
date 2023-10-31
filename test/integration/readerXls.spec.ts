@@ -40,4 +40,17 @@ describe("Reader Xls endpoints", () => {
     expect(body.Splitters[0]).toHaveProperty("splitterType");
     expect(body.Splitters[0]).toHaveProperty("ratio");
   });
+
+  it("Should create all clients on DB", async () => {
+    const { status, body } = await supertest(server).post("/read-xls/clients");
+
+    expect(status).toBe(200);
+    expect(body.Clients.length).toBe(42);
+    expect(body.Clients[0]).toHaveProperty("address");
+    expect(body.Clients[0]).toHaveProperty("box");
+    expect(body.Clients[0]).toHaveProperty("lat");
+    expect(body.Clients[0]).toHaveProperty("lng");
+    expect(body.Clients[0]).toHaveProperty("code");
+    expect(body.Clients[0]).toHaveProperty("status");
+  });
 });
